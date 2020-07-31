@@ -15,6 +15,9 @@ namespace Aljourney
         //Backgrounds
         private Texture2D forestBackground;
 
+        //Characters
+        private Texture2D rho;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -42,6 +45,9 @@ namespace Aljourney
 
             //load the backgrounds
             forestBackground = Content.Load<Texture2D>("backgroundforest");
+
+            //load the characters
+            //Rho needs to be animated, but we have to be specific about what part of the atlas we are using
 
         }
 
