@@ -20,10 +20,15 @@ namespace Aljourney
         private AnimateSprite animateRho;
         private float rhoTimer;
 
+        //Others
+        private Texture2D textBubble;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            this.IsMouseVisible = true;
         }
 
         
@@ -52,6 +57,9 @@ namespace Aljourney
             rho = Content.Load<Texture2D>("RhoAtlas");
             animateRho = new AnimateSprite(rho, 1, 3);
 
+            //load others
+            textBubble = Content.Load<Texture2D>("TextBubble");
+
         }
 
         
@@ -68,6 +76,7 @@ namespace Aljourney
 
             // TODO: Add your update logic here
 
+            //time Rho's animation
             rhoTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (rhoTimer > 200)
             {
@@ -83,9 +92,14 @@ namespace Aljourney
         {
             spriteBatch.Begin();
 
+            //draw background
             spriteBatch.Draw(forestBackground, new Rectangle(0, 0, 1300, 900), Color.White);
 
+            //draw sprites
             animateRho.Draw(spriteBatch, new Vector2(150, 530));
+
+            //draw others
+            spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
 
             spriteBatch.End();
 
