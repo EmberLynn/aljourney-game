@@ -17,6 +17,8 @@ namespace Aljourney
 
         //Characters
         private Texture2D rho;
+        private AnimateSprite animateRho;
+        private float rhoTimer;
 
         public Game1()
         {
@@ -47,7 +49,8 @@ namespace Aljourney
             forestBackground = Content.Load<Texture2D>("backgroundforest");
 
             //load the characters
-            //Rho needs to be animated, but we have to be specific about what part of the atlas we are using
+            rho = Content.Load<Texture2D>("RhoAtlas");
+            animateRho = new AnimateSprite(rho, 1, 3);
 
         }
 
@@ -65,6 +68,13 @@ namespace Aljourney
 
             // TODO: Add your update logic here
 
+            rhoTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (rhoTimer > 200)
+            {
+                animateRho.Update();
+                rhoTimer = 0;
+            }
+
             base.Update(gameTime);
         }
 
@@ -74,6 +84,8 @@ namespace Aljourney
             spriteBatch.Begin();
 
             spriteBatch.Draw(forestBackground, new Rectangle(0, 0, 1300, 900), Color.White);
+
+            animateRho.Draw(spriteBatch, new Vector2(150, 530));
 
             spriteBatch.End();
 
