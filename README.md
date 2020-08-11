@@ -1,4 +1,4 @@
-# Aljourney - An exciting adventure through algebra!(or it will be when we get that far...)
+# Aljourney - An exciting adventure through algebra!
 
 # Others
 Created and added this simple dialog box
