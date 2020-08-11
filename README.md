@@ -3,7 +3,8 @@
 # Others
 Created and added this simple dialog box
 
-![TextBubble](https://user-images.githubusercontent.com/46328589/89947649-09b26700-dbe2-11ea-8e36-c95f7a817c74.png)
+![DialogCapture](https://user-images.githubusercontent.com/46328589/89947964-85acaf00-dbe2-11ea-8d5f-af901038923c.PNG)
+![DialogCapture2](https://user-images.githubusercontent.com/46328589/89947966-87767280-dbe2-11ea-859d-b9f5b9173553.PNG)
 
 # Characters
 Here is a simple atlas for the narrator of the story.  I am also Rho's creator; all art for this project will be original art of my own creation.
