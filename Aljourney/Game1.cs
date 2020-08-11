@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Aljourney.Helpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Aljourney
 {
@@ -20,8 +23,14 @@ namespace Aljourney
         private AnimateSprite animateRho;
         private float rhoTimer;
 
-        //Others
+        //Dialog fields
         private Texture2D textBubble;
+        private SpriteFont retroFont;
+        private string currentLine = "";
+        private List<string> currentDialog = new List<string>();
+        private int dialogCounter = 0;
+        private DialogReader dialogReader = new DialogReader();
+        private MouseState oldMouseState;
 
         public Game1()
         {
@@ -29,6 +38,7 @@ namespace Aljourney
             Content.RootDirectory = "Content";
 
             this.IsMouseVisible = true;
+            currentDialog = dialogReader.getDialog();
         }
 
         
@@ -60,6 +70,9 @@ namespace Aljourney
             //load others
             textBubble = Content.Load<Texture2D>("TextBubble");
 
+            //load font
+            retroFont = Content.Load<SpriteFont>("RetroFont");
+
         }
 
         
@@ -74,7 +87,22 @@ namespace Aljourney
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            //get mouse click to progress dialog box
+            if(dialogCounter == 0)
+            {
+                currentLine = currentDialog[dialogCounter];
+                dialogCounter++;
+            }
+            MouseState mouseState = Mouse.GetState();
+            if(mouseState.LeftButton == ButtonState.Pressed && !oldMouseState.Equals(mouseState))
+            {
+                if (dialogCounter < currentDialog.Count)
+                {
+                    currentLine = currentDialog[dialogCounter];
+                    dialogCounter++;
+                }
+            }
+            oldMouseState = mouseState;
 
             //time Rho's animation
             rhoTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -100,6 +128,9 @@ namespace Aljourney
 
             //draw others
             spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
+
+            //add text to textBubble
+            spriteBatch.DrawString(retroFont, currentLine, new Vector2(300, 410), Color.Red);
 
             spriteBatch.End();
 

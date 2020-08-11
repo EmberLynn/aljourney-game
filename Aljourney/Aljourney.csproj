@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AnimateSprite.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Helpers\DialogReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dialogs\IntroDialog.txt" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

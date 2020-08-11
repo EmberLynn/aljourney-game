@@ -1,0 +1,11 @@
+﻿This is an example
+of reading text from
+a file line by line
+_B
+Here we are reading
+the next line after
+you clicked!
+_B
+And this is the
+line after that line!
+_B
