@@ -1,4 +1,9 @@
-# Aljourney - An exciting adventure through algebra!
+# Aljourney - An exciting adventure through algebra!(or it will be when we get that far...)
+
+# Others
+Created and added this simple dialog box
+
+![TextBubble](https://user-images.githubusercontent.com/46328589/89947649-09b26700-dbe2-11ea-8e36-c95f7a817c74.png)
 
 # Characters
 Here is a simple atlas for the narrator of the story.  I am also Rho's creator; all art for this project will be original art of my own creation.
