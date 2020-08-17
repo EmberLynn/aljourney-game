@@ -44,6 +44,7 @@
     <Compile Include="AnimateSprite.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Helpers\DialogReader.cs" />
+    <Compile Include="Helpers\TypeWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -31,6 +31,7 @@ namespace Aljourney
         private int dialogCounter = 0;
         private DialogReader dialogReader = new DialogReader();
         private MouseState oldMouseState;
+        private TypeWriter typeWriter;
 
         public Game1()
         {
@@ -104,14 +105,18 @@ namespace Aljourney
             }
             oldMouseState = mouseState;
 
+            typeWriter = new TypeWriter(currentLine);
+
             //time Rho's animation
             rhoTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (rhoTimer > 200)
             {
                 animateRho.Update();
                 rhoTimer = 0;
+                
+                typeWriter.Update();
             }
-
+            
             base.Update(gameTime);
         }
 
@@ -130,7 +135,7 @@ namespace Aljourney
             spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
 
             //add text to textBubble
-            spriteBatch.DrawString(retroFont, currentLine, new Vector2(300, 410), Color.Red);
+            spriteBatch.DrawString(retroFont, typeWriter.typeLine(), new Vector2(300, 410), Color.Red);
 
             spriteBatch.End();
 
