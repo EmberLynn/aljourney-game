@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 namespace Aljourney
 {
@@ -89,9 +90,11 @@ namespace Aljourney
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
             //get mouse click to progress dialog box
-            if(dialogCounter == 0)
+            //where dialogCounter is the current position in the array of dialogs
+            //currentDialog is the array of dialogs retrieved from the file
+            //currentLine is the line we are going to type to the screen
+            if (dialogCounter == 0)
             {
                 currentLine = currentDialog[dialogCounter];
                 dialogCounter++;
@@ -102,10 +105,14 @@ namespace Aljourney
                 if (dialogCounter < currentDialog.Count)
                 {
                     currentLine = currentDialog[dialogCounter];
-                    dialogCounter++;
                 }
+                dialogCounter++;
+
+                //these are for typing out a line to the screen
                 textCounter = 0;
                 typedLine = "";
+
+               
             }
             oldMouseState = mouseState;
 
@@ -116,7 +123,7 @@ namespace Aljourney
                 animateRho.Update();
                 rhoTimer = 0;
             }
-
+            
             textTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if(textTimer > 100) 
             {
@@ -130,7 +137,7 @@ namespace Aljourney
                 }
                 textTimer = 0;
             }
-          
+
 
             base.Update(gameTime);
         }
@@ -147,12 +154,13 @@ namespace Aljourney
             animateRho.Draw(spriteBatch, new Vector2(150, 530));
 
             //draw others
-            spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
+            if(dialogCounter <= currentDialog.Count) 
+            {
+                spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
 
-            //add text to textBubble
-            spriteBatch.DrawString(retroFont, typedLine, new Vector2(300, 410), Color.Red);
-
- 
+                //add text to textBubble
+                spriteBatch.DrawString(retroFont, typedLine, new Vector2(300, 410), Color.Red);
+            }
 
             spriteBatch.End();
 
