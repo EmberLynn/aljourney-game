@@ -24,12 +24,13 @@ namespace Aljourney.Helpers
 
             while ((line = introFile.ReadLine()) != null)
             {
-                if (line.Equals("_B")){
+                if (line.Equals("_B"))
+                {
                     introDialog.Add(finalLine);
                     line = introFile.ReadLine();
                     finalLine = "";
                 }
-                finalLine += "\n" + line;
+                finalLine += line + "\n";
             }
 
             return introDialog;

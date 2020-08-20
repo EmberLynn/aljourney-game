@@ -35,6 +35,7 @@ namespace Aljourney
         private int textCounter = 0;
         private string typedLine = "";
         private float textTimer;
+        private int mouseClicks;
 
         public Game1()
         {
@@ -90,10 +91,11 @@ namespace Aljourney
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            //get mouse click to progress dialog box
-            //where dialogCounter is the current position in the array of dialogs
-            //currentDialog is the array of dialogs retrieved from the file
-            //currentLine is the line we are going to type to the screen
+
+            /*get mouse click to progress dialog box
+            where dialogCounter is the current position in the array of dialogs
+            currentDialog is the array of dialogs retrieved from the file
+            currentLine is the line we are going to type to the screen*/
             if (dialogCounter == 0)
             {
                 currentLine = currentDialog[dialogCounter];
@@ -102,17 +104,27 @@ namespace Aljourney
             MouseState mouseState = Mouse.GetState();
             if(mouseState.LeftButton == ButtonState.Pressed && !oldMouseState.Equals(mouseState))
             {
-                if (dialogCounter < currentDialog.Count)
+                mouseClicks++;
+                if(mouseClicks % 2 == 1)
                 {
-                    currentLine = currentDialog[dialogCounter];
+                    textCounter = currentLine.Length;
+                    typedLine = "";
+                    foreach (char c in currentLine) 
+                    {
+                        typedLine += c;
+                    }
                 }
-                dialogCounter++;
-
-                //these are for typing out a line to the screen
-                textCounter = 0;
-                typedLine = "";
-
-               
+                else 
+                {
+                    if (dialogCounter < currentDialog.Count)
+                    {
+                        currentLine = currentDialog[dialogCounter];
+                        textCounter = 0;
+                        typedLine = "";
+                    }
+                    dialogCounter++;
+                }
+                
             }
             oldMouseState = mouseState;
 
@@ -123,22 +135,20 @@ namespace Aljourney
                 animateRho.Update();
                 rhoTimer = 0;
             }
-            
+
             textTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if(textTimer > 100) 
+            if (textTimer > 100)
             {
-                if (textCounter <= currentLine.Length)
-                {
-                    textCounter++;
-                }
                 if (textCounter < currentLine.Length)
                 {
                     typedLine += currentLine[textCounter];
                 }
+                if (textCounter <= currentLine.Length)
+                {
+                    textCounter++;
+                }
                 textTimer = 0;
             }
-
-
             base.Update(gameTime);
         }
 
@@ -160,6 +170,7 @@ namespace Aljourney
 
                 //add text to textBubble
                 spriteBatch.DrawString(retroFont, typedLine, new Vector2(300, 410), Color.Red);
+
             }
 
             spriteBatch.End();
