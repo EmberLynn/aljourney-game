@@ -147,6 +147,10 @@ namespace Aljourney
                 {
                     textCounter++;
                 }
+                if(textCounter == currentLine.Length)
+                {
+                    mouseClicks++;
+                }
                 textTimer = 0;
             }
             base.Update(gameTime);
