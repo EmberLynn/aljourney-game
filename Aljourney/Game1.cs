@@ -21,10 +21,14 @@ namespace Aljourney
 
         //Characters
         private Texture2D rho;
+        private Texture2D xCharacter;
+        private Texture2D yCharacter;
         private AnimateSprite animateRho;
+        private AnimateSprite animateXCharacter;
+        private AnimateSprite animateYCharacter;
         private float rhoTimer;
 
-        //Dialog fields
+        //Dialog box
         private Texture2D textBubble;
         private SpriteFont retroFont;
         private string currentLine = "";
@@ -71,6 +75,12 @@ namespace Aljourney
             //load the characters
             rho = Content.Load<Texture2D>("RhoAtlas");
             animateRho = new AnimateSprite(rho, 1, 3);
+
+            xCharacter = Content.Load<Texture2D>("XAtlas");
+            animateXCharacter = new AnimateSprite(xCharacter, 1, 2);
+
+            yCharacter = Content.Load<Texture2D>("YAtlas");
+            animateYCharacter = new AnimateSprite(yCharacter, 1, 2);
 
             //load others
             textBubble = Content.Load<Texture2D>("TextBubble");
@@ -130,9 +140,11 @@ namespace Aljourney
 
             //time Rho's animation
             rhoTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (rhoTimer > 200)
+            if (rhoTimer > 250)
             {
                 animateRho.Update();
+                animateXCharacter.Update();
+                animateYCharacter.Update();
                 rhoTimer = 0;
             }
 
@@ -165,7 +177,9 @@ namespace Aljourney
             spriteBatch.Draw(forestBackground, new Rectangle(0, 0, 1300, 900), Color.White);
 
             //draw sprites
-            animateRho.Draw(spriteBatch, new Vector2(150, 530));
+            animateRho.Draw(spriteBatch, new Vector2(160, 560));
+            animateXCharacter.Draw(spriteBatch, new Vector2(600, 560));
+            animateYCharacter.Draw(spriteBatch, new Vector2(700, 570));
 
             //draw others
             if(dialogCounter <= currentDialog.Count) 
@@ -173,7 +187,7 @@ namespace Aljourney
                 spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
 
                 //add text to textBubble
-                spriteBatch.DrawString(retroFont, typedLine, new Vector2(300, 410), Color.Red);
+                spriteBatch.DrawString(retroFont, typedLine, new Vector2(290, 410), Color.Red);
 
             }
 
