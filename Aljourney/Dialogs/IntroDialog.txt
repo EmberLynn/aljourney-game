@@ -1,11 +1,26 @@
-﻿This is an example
-of reading text from
-a file line by line
+﻿Oh! Hi there!
 _B
-Here we are reading
-the next line after
-you clicked!
+My name is Rho and
+these are my two
+friends X and Y.
 _B
-And this is the
-line after that line!
+I know, creative,
+right?
+_B
+I'm not sure what you
+are doing here, but we
+could sure use some 
+serious help at the 
+moment.
+_B
+See, it is a long story
+so I won't go into the
+details right now. But to
+say the least, we are in 
+some seriously big 
+trouble!
+_B
+I was wondering, do 
+you think you'd be able 
+to lend us a hand?
 _B

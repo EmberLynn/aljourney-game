@@ -15,12 +15,12 @@ namespace Aljourney.Helpers
         private string finalLine;
         System.IO.StreamReader introFile;
 
-        public DialogReader() {
-            introFile = new System.IO.StreamReader
-                   (@"C:\Users\ember\source\repos\Aljourney\Aljourney\Dialogs\IntroDialog.txt");
-        }
+        public DialogReader() {}
 
-        public List<string> getDialog() {
+        public List<string> getDialog(string fileToRead) {
+
+            introFile = new System.IO.StreamReader
+                   (fileToRead);
 
             while ((line = introFile.ReadLine()) != null)
             {

@@ -34,12 +34,15 @@ namespace Aljourney
         private string currentLine = "";
         private List<string> currentDialog = new List<string>();
         private int dialogCounter = 0;
-        private DialogReader dialogReader = new DialogReader();
+        private DialogReader dialogReader;
         private MouseState oldMouseState;
         private int textCounter = 0;
         private string typedLine = "";
         private float textTimer;
         private int mouseClicks;
+        //yes and no dialog options
+        private Texture2D answerBox;
+        
 
         public Game1()
         {
@@ -47,7 +50,6 @@ namespace Aljourney
             Content.RootDirectory = "Content";
 
             this.IsMouseVisible = true;
-            currentDialog = dialogReader.getDialog();
         }
 
         
@@ -84,6 +86,7 @@ namespace Aljourney
 
             //load others
             textBubble = Content.Load<Texture2D>("TextBubble");
+            answerBox = new Texture2D(GraphicsDevice, 1, 1);
 
             //load font
             retroFont = Content.Load<SpriteFont>("RetroFont");
@@ -101,6 +104,16 @@ namespace Aljourney
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            answerBox.SetData(new Color[] { Color.LemonChiffon });
+
+            //singleton!!!
+            if (dialogReader == null)
+            {
+                dialogReader = new DialogReader();
+                currentDialog = dialogReader.getDialog
+                    (@"C:\Users\ember\source\repos\Aljourney\Aljourney\Dialogs\IntroDialog.txt");
+            }
 
             /*get mouse click to progress dialog box
             where dialogCounter is the current position in the array of dialogs
@@ -182,14 +195,11 @@ namespace Aljourney
             animateYCharacter.Draw(spriteBatch, new Vector2(700, 570));
 
             //draw others
-            if(dialogCounter <= currentDialog.Count) 
-            {
-                spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
-
-                //add text to textBubble
-                spriteBatch.DrawString(retroFont, typedLine, new Vector2(290, 410), Color.Red);
-
-            }
+            spriteBatch.Draw(answerBox, new Rectangle(300, 480, 80, 40), Color.White);
+            spriteBatch.Draw(answerBox, new Rectangle(400, 480, 80, 40), Color.White);
+            spriteBatch.Draw(textBubble, new Vector2(180, 250), Color.White);
+            //add text to textBubble
+            spriteBatch.DrawString(retroFont, typedLine, new Vector2(290, 410), Color.Red);
 
             spriteBatch.End();
 
